@@ -1,37 +1,163 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My First Website</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #f5f5f5;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            color: #333;
-            font-size: 40px;
-        }
-        p {
-            color: #666;
-            font-size: 20px;
-        }
-        button {
-            padding: 12px 25px;
-            font-size: 18px;
-            background: blue;
-            color: white;
-            border: none;
-            border-radius: 8px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Home - My Website</title>
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --primary:#0b63ff;
+      --text:#222;
+      --muted:#666;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,Helvetica,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+
+    /* NAVBAR */
+    .nav{
+      width:100%;
+      background:white;
+      box-shadow:0 2px 8px rgba(20,20,40,.06);
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .nav .container{
+      max-width:1100px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:12px 16px;
+      gap:12px;
+    }
+    .brand{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      text-decoration:none;
+      color:var(--text);
+    }
+    .brand .logo{
+      width:42px;height:42px;border-radius:8px;
+      background:linear-gradient(135deg,var(--primary),#6aa0ff);
+      display:flex;align-items:center;justify-content:center;color:white;font-weight:700;
+      font-size:18px;
+    }
+    .brand .title{
+      font-size:18px;font-weight:700;
+    }
+
+    .menu{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .menu a{
+      text-decoration:none;color:var(--muted);padding:8px 12px;border-radius:8px;font-weight:600;
+    }
+    .menu a:hover{color:var(--text);background:rgba(11,99,255,0.06)}
+    .menu a.active{color:white;background:var(--primary)}
+
+    .cta{
+      padding:8px 14px;background:var(--primary);color:white;border-radius:10px;text-decoration:none;font-weight:700;
+      box-shadow:0 6px 14px rgba(11,99,255,.12);
+    }
+
+    /* mobile */
+    .hamburger{
+      display:none;border:none;background:transparent;font-size:20px;
+    }
+    @media (max-width:720px){
+      .menu{display:none;position:absolute;right:12px;top:64px;background:white;flex-direction:column;padding:10px;border-radius:10px;box-shadow:0 10px 30px rgba(20,20,40,.08)}
+      .menu.show{display:flex}
+      .hamburger{display:block}
+    }
+
+    /* Hero */
+    .hero{
+      max-width:1100px;margin:28px auto;padding:28px 16px;display:flex;gap:24px;align-items:center;
+      justify-content:space-between;
+    }
+    .hero-left{flex:1}
+    .hero h1{font-size:34px;margin:0 0 12px}
+    .hero p{color:var(--muted);margin:0 0 18px;font-size:18px}
+    .hero-right{width:320px;background:white;padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(20,20,40,.06);text-align:center}
+
+    footer{max-width:1100px;margin:36px auto;padding:16px;color:var(--muted);text-align:center}
+  </style>
 </head>
 <body>
-    <h1>Welcome to My Website 🎉</h1>
-    <p>This is my first working website!</p>
 
-    <button onclick="alert('Button clicked!')">Click Me</button>
+  <header class="nav" id="site-nav">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <div class="logo">RW</div>
+        <div class="title">My Website</div>
+      </a>
+
+      <nav>
+        <button class="hamburger" id="hamb">☰</button>
+        <div class="menu" id="menu">
+          <a href="index.html" data-link="index">Home</a>
+          <a href="about.html" data-link="about">About</a>
+          <a href="contact.html" data-link="contact">Contact</a>
+          <a href="#" class="cta">Sign Up</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-left">
+        <h1>Welcome to your live website 🎉</h1>
+        <p>Ye homepage ka simple hero section hai. Ab hum step-by-step features add karenge — navigation, pages, contact form, login, chat, etc.</p>
+        <p><strong>Next:</strong> agar chaho to main About aur Contact pages bhi ready kar deta hoon (done below).</p>
+      </div>
+
+      <div class="hero-right">
+        <h3>Website Ready</h3>
+        <p style="color:var(--muted)">Your site is live. Add features one-by-one — I will give code for each.</p>
+        <a href="about.html" style="display:inline-block;margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(11,99,255,.08);text-decoration:none;color:var(--primary)">Learn more</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> My Website — Made by you
+  </footer>
+
+  <script>
+    // set year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // mobile menu toggle
+    const hamb = document.getElementById('hamb');
+    const menu = document.getElementById('menu');
+    hamb.addEventListener('click', ()=> menu.classList.toggle('show'));
+
+    // mark active link
+    const links = document.querySelectorAll('.menu a');
+    const path = location.pathname.split('/').pop() || 'index.html';
+    links.forEach(a=>{
+      const name = a.getAttribute('href').split('/').pop();
+      if(name === path) a.classList.add('active');
+    });
+
+    // close mobile menu when clicking outside (optional)
+    document.addEventListener('click', (e)=>{
+      if(!e.target.closest('#menu') && !e.target.closest('#hamb')){
+        menu.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>
