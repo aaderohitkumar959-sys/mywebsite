@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chat System</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #e5ddd5;
+}
+
+/* MAIN LAYOUT */
+.chat-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+/* LEFT PANEL (Chats + Search + Profile) */
+.left-panel {
+  width: 30%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ddd;
+}
+
+/* Top Bar */
+.left-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #ededed;
+}
+.profile-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #0b63ff;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 800;
+}
+
+/* Search bar */
+.search-box {
+  padding: 8px;
+}
+.search-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Chats list */
+.chat-list {
+  flex: 1;
+  overflow-y: auto;
+}
+.chat-item {
+  padding: 14px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+}
+.chat-item:hover {
+  background: #f6f6f6;
+}
+
+/* RIGHT PANEL (chat area) */
+.right-panel {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  background: #efeae2;
+}
+
+/* Chat header */
+.chat-header {
+  background: #ededed;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-left: 1px solid #ddd;
+}
+.chat-header .user {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Messages */
+.messages {
+  flex: 1;
+  padding: 14px;
+  overflow-y: auto;
+}
+.msg {
+  margin-bottom: 12px;
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #fff;
+}
+.me {
+  background: #d9fdd3;
+  margin-left: auto;
+}
+
+/* Input box */
+.input-box {
+  display: flex;
+  padding: 12px;
+  background: #f0f0f0;
+}
+.input-box input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+}
+.input-box button {
+  padding: 12px 18px;
+  margin-left: 8px;
+  border: none;
+  background: #0b63ff;
+  color: white;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="chat-container">
+
+  <!-- LEFT PANEL -->
+  <div class="left-panel">
+
+    <!-- Profile -->
+    <div class="left-top">
+      <div class="profile-img">U</div>
+      <div>⋮</div>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box">
+      <input type="text" placeholder="Search or start new chat" />
+    </div>
+
+    <!-- Chat List -->
+    <div class="chat-list">
+      <div class="chat-item">Rohit</div>
+      <div class="chat-item">Aman</div>
+      <div class="chat-item">Priya</div>
+    </div>
+
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <div class="right-panel">
+
+    <div class="chat-header">
+      <div class="profile-img" style="width:35px;height:35px;font-size:14px">R</div>
+      <div class="user">Rohit</div>
+    </div>
+
+    <div class="messages" id="messages">
+      <div class="msg">Hello!</div>
+      <div class="msg me">Hi, how are you?</div>
+    </div>
+
+    <div class="input-box">
+      <input type="text" id="msgInput" placeholder="Type a message" />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+function sendMessage() {
+  let input = document.getElementById("msgInput");
+  if (input.value.trim() === "") return;
+
+  let box = document.getElementById("messages");
+  let div = document.createElement("div");
+  div.className = "msg me";
+  div.textContent = input.value;
+  box.appendChild(div);
+
+  input.value = "";
+  box.scrollTop = box.scrollHeight;
+}
+</script>
+
+</body>
+</html>
